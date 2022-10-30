@@ -43,22 +43,22 @@
 								<ul class="dropdown-menu dropdown-menu-end">
 									<li>
 										<h:commandLink styleClass="dropdown-item" action="#{localeBean.setLanguage('en')}" rendered="#{localeBean.language != 'en_US'}">
-											<h:graphicImage name="flags/us.svg" library="imgs" height="14em" styleClass="mr-2"/> <span>English</span>
+											<h:graphicImage name="flags/us.svg" library="imgs" height="14em" styleClass="mr-2" alt="US flag"/> <span>English</span>
 										</h:commandLink>
 									</li>
 									<li>
 										<h:commandLink styleClass="dropdown-item" action="#{localeBean.setLanguage('es')}" rendered="#{localeBean.language != 'es_ES'}">
-											<h:graphicImage name="flags/es.svg" library="imgs" height="14em" styleClass="mr-2"/> <span>Español</span>
+											<h:graphicImage name="flags/es.svg" library="imgs" height="14em" styleClass="mr-2" alt="Spanish flag"/> <span>Español</span>
 										</h:commandLink>
 									</li>
 									<li>
 										<h:commandLink styleClass="dropdown-item" action="#{localeBean.setLanguage('pt_BR')}" rendered="#{localeBean.language != 'pt_BR'}">
-											<h:graphicImage name="flags/br.svg" library="imgs" height="14em" styleClass="mr-2"/> <span>Português</span>
+											<h:graphicImage name="flags/br.svg" library="imgs" height="14em" styleClass="mr-2" alt="Brazilian flag"/> <span>Português</span>
 										</h:commandLink>
 									</li>
 									<li>
 										<h:commandLink styleClass="dropdown-item" action="#{localeBean.setLanguage('pt_PT')}" rendered="#{localeBean.language != 'pt_PT'}">
-											<h:graphicImage name="flags/pt.svg" library="imgs" height="14em" styleClass="mr-2"/> <span>Português</span>
+											<h:graphicImage name="flags/pt.svg" library="imgs" height="14em" styleClass="mr-2" alt="Portuguese flag"/> <span>Português</span>
 										</h:commandLink>
 									</li>
 								</ul>
