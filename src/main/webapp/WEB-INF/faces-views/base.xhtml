@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:ezcomps="http://xmlns.jcp.org/jsf/composite/ezcomps"
+      xmlns:lomps="http://xmlns.jcp.org/jsf/composite/lomps"
+      template="/WEB-INF/templates/default.xhtml">
+      <ui:param name="pageTitle" value="#{msgs['book.page.title']}"/>
+      <ui:define name="content">
+      	<h:form>
+        	<div>
+        		<ezcomps:button icon="search"/>
+        	</div>
+        	<div>
+        		<lomps:button icon="person"/>
+        	</div>
+        </h:form>
+	</ui:define>
+</ui:composition>
