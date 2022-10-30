@@ -17,13 +17,8 @@
 		<dependency>
 			<groupId>jakarta.platform</groupId>
 			<artifactId>jakarta.jakartaee-api</artifactId>
-			<version>8.0.0</version>
+			<version>9.0.0</version>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.omnifaces</groupId>
-			<artifactId>omnifaces</artifactId>
-			<version>3.14</version>
 		</dependency>
 		<dependency>
 			<groupId>br.com.vikeo</groupId>
@@ -60,7 +55,7 @@
 			<plugin>
 				<groupId>org.apache.tomee.maven</groupId>
 				<artifactId>tomee-maven-plugin</artifactId>
-				<version>8.0.13</version>
+				<version>9.0.0-M8</version>
 				<configuration>
 					<context>ROOT</context>
 					<args>-Duser.language=en</args>
