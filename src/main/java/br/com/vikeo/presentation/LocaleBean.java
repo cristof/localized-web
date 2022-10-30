@@ -3,10 +3,9 @@ package br.com.vikeo.presentation;
 import java.io.Serializable;
 import java.util.Locale;
 
-import org.omnifaces.util.Faces;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +46,7 @@ public class LocaleBean implements Serializable {
 		switch (localeCode) {
 		case "en":
 		case "en_US":
-			locale = Locale.ENGLISH;
+			locale = new Locale("en", "US");
 			language = "en_US";
 			break;
 		case "pt":
@@ -55,22 +54,22 @@ public class LocaleBean implements Serializable {
 			language = "pt";
 			break;
 		case "pt_BR":
-			locale = Locale.forLanguageTag("pt");
+			locale = new Locale("pt", "BR");
 			language = "pt_BR";
 			break;
 		case "pt_PT":
-			locale = Locale.forLanguageTag("pt");
+			locale = new Locale("pt", "PT");
 			language = "pt_PT";
 			break;
 		case "es":
 		case "es_ES":
-			locale = Locale.forLanguageTag("es");
+			locale =  new Locale("es", "ES");
 			language = "es_ES";
 			break;
 		default:
 			break;
 		}
-		Faces.setLocale(locale);
+		FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
 		System.out.println("Locale set to " + locale.getLanguage());
 	}
 
