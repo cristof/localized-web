@@ -100,9 +100,6 @@
 		</profile>
 		<profile>
 			<id>jakarta8-mojarra-fixed</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<properties>
 				<src.dir>src/main/jakarta8</src.dir>
 				<jakarta.version>8.0.0</jakarta.version>
@@ -181,9 +178,6 @@
 		</profile>
 		<profile>
 			<id>jakarta8-myfaces</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<properties>
 				<src.dir>src/main/jakarta8</src.dir>
 				<jakarta.version>8.0.0</jakarta.version>
@@ -205,9 +199,6 @@
 		</profile>
 		<profile>
 			<id>jakarta8-myfaces-fixed</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<properties>
 				<src.dir>src/main/jakarta8</src.dir>
 				<jakarta.version>8.0.0</jakarta.version>
