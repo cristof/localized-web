@@ -11,13 +11,14 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<compiler.release>11</compiler.release>
+		<jsf.stage>Production</jsf.stage>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>jakarta.platform</groupId>
 			<artifactId>jakarta.jakartaee-api</artifactId>
-			<version>8.0.0</version>
+			<version>${jakarta.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -28,16 +29,12 @@
 	</dependencies>
 
 	<build>
+		<sourceDirectory>${src.dir}</sourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.10.1</version>
-				<configuration>
-					<source>11</source>
-					<target>11</target>
-					<release>11</release>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -50,26 +47,239 @@
 				<version>3.3.2</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.tomee.maven</groupId>
-				<artifactId>tomee-maven-plugin</artifactId>
-				<version>8.0.13</version>
-				<configuration>
-					<context>ROOT</context>
-					<args>-Duser.language=en</args>
-					<tomeeClassifier>plus</tomeeClassifier>
-					<!--
-          <libs>
-          	<lib>org.glassfish:jakarta.faces:2.3.18</lib>
-          	<lib>remove:jakarta.faces</lib>
-          </libs
-		  -->
+					<webResources>
+					  <resource>
+					    <directory>src/main/webapp</directory>
+					    <filtering>true</filtering>
+					    <includes>
+					      <include>WEB-INF/web.xml</include>
+					    </includes>
+					  </resource>
+					  <resource>
+					    <directory>src/main/webapp</directory>
+					    <filtering>false</filtering>
+					    <excludes>
+					      <exclude>WEB-INF/web.xml</exclude>
+					    </excludes>
+					  </resource>
+					</webResources>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	
+	<profiles>
+		<profile>
+			<id>jakarta8-mojarra</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<src.dir>src/main/jakarta8</src.dir>
+				<jakarta.version>8.0.0</jakarta.version>
+				<jakarta.package>javax</jakarta.package>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.tomee.maven</groupId>
+						<artifactId>tomee-maven-plugin</artifactId>
+						<version>8.0.13</version>
+						<configuration>
+							<context>ROOT</context>
+							<args>-Duser.language=en</args>
+							<libs>
+							  <lib>remove:myfaces-impl</lib>
+							  <lib>remove:myfaces-api</lib>
+							  <lib>org.glassfish:jakarta.faces:2.3.18</lib>
+							</libs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>jakarta8-mojarra-fixed</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<src.dir>src/main/jakarta8</src.dir>
+				<jakarta.version>8.0.0</jakarta.version>
+				<jakarta.package>javax</jakarta.package>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.tomee.maven</groupId>
+						<artifactId>tomee-maven-plugin</artifactId>
+						<version>8.0.13</version>
+						<configuration>
+							<context>ROOT</context>
+							<args>-Duser.language=en</args>
+							<libs>
+							  <lib>remove:myfaces-impl</lib>
+							  <lib>remove:myfaces-api</lib>
+							  <lib>org.glassfish:jakarta.faces:2.3.19-SNAPSHOT</lib>
+							</libs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>jakarta9-mojarra</id>
+			<properties>
+				<src.dir>src/main/jakarta9</src.dir>
+				<jakarta.version>9.0.0</jakarta.version>
+				<jakarta.package>jakarta</jakarta.package>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.tomee.maven</groupId>
+						<artifactId>tomee-maven-plugin</artifactId>
+						<version>9.0.0-M8</version>
+						<configuration>
+							<context>ROOT</context>
+							<args>-Duser.language=en</args>
+							<libs>
+							  <lib>remove:myfaces-api</lib>
+							  <lib>remove:myfaces-impl</lib>
+							  <lib>org.glassfish:jakarta.faces:3.0.2</lib>
+							</libs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>jakarta9-mojarra-fixed</id>
+			<properties>
+				<src.dir>src/main/jakarta9</src.dir>
+				<jakarta.version>9.0.0</jakarta.version>
+				<jakarta.package>jakarta</jakarta.package>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.tomee.maven</groupId>
+						<artifactId>tomee-maven-plugin</artifactId>
+						<version>9.0.0-M8</version>
+						<configuration>
+							<context>ROOT</context>
+							<args>-Duser.language=en</args>
+							<libs>
+							  <lib>remove:myfaces-api</lib>
+							  <lib>remove:myfaces-impl</lib>
+							  <lib>org.glassfish:jakarta.faces:3.0.3-SNAPSHOT</lib>
+							</libs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>jakarta8-myfaces</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<src.dir>src/main/jakarta8</src.dir>
+				<jakarta.version>8.0.0</jakarta.version>
+				<jakarta.package>javax</jakarta.package>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.tomee.maven</groupId>
+						<artifactId>tomee-maven-plugin</artifactId>
+						<version>8.0.13</version>
+						<configuration>
+							<context>ROOT</context>
+							<args>-Duser.language=en</args>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>jakarta8-myfaces-fixed</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<src.dir>src/main/jakarta8</src.dir>
+				<jakarta.version>8.0.0</jakarta.version>
+				<jakarta.package>javax</jakarta.package>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.tomee.maven</groupId>
+						<artifactId>tomee-maven-plugin</artifactId>
+						<version>8.0.13</version>
+						<configuration>
+							<context>ROOT</context>
+							<args>-Duser.language=en</args>
+							<libs>
+							  <lib>remove:myfaces-impl</lib>
+							  <lib>remove:myfaces-api</lib>
+							  <lib>org.apache.myfaces.core:myfaces-bundle:2.3.11-SNAPSHOT</lib>
+							</libs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>jakarta9-myfaces</id>
+			<properties>
+				<src.dir>src/main/jakarta9</src.dir>
+				<jakarta.version>9.0.0</jakarta.version>
+				<jakarta.package>jakarta</jakarta.package>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.tomee.maven</groupId>
+						<artifactId>tomee-maven-plugin</artifactId>
+						<version>9.0.0-M8</version>
+						<configuration>
+							<context>ROOT</context>
+							<args>-Duser.language=en</args>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>jakarta9-myfaces-fixed</id>
+			<properties>
+				<src.dir>src/main/jakarta9</src.dir>
+				<jakarta.version>9.0.0</jakarta.version>
+				<jakarta.package>jakarta</jakarta.package>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.tomee.maven</groupId>
+						<artifactId>tomee-maven-plugin</artifactId>
+						<version>9.0.0-M8</version>
+						<configuration>
+							<context>ROOT</context>
+							<args>-Duser.language=en</args>
+							<libs>
+							  <lib>remove:myfaces-api</lib>
+							  <lib>remove:myfaces-impl</lib>
+							  <lib>org.apache.myfaces.core:myfaces-bundle:3.0.3-SNAPSHOT</lib>
+							</libs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<repositories>
 		<repository>
